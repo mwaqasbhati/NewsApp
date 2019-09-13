@@ -1,6 +1,6 @@
 //
-//  ArticleListTests.swift
-//  NewsArticleTests
+//  NewsTests.swift
+//  NewsNewsTests
 //
 //  Created by macadmin on 7/25/19.
 //  Copyright © 2019 Muhammad Waqas. All rights reserved.
@@ -8,9 +8,9 @@
 
 import UIKit
 import XCTest
-@testable import NewsArticle
+@testable import NewsNews
 
-class ArticleListTests: XCTestCase {
+class NewsTests: XCTestCase {
 
     private var promise: XCTestExpectation!
     
@@ -22,29 +22,29 @@ class ArticleListTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testArticleListViewInitializing() {
-        XCTAssertNotNil(ArticleListWireFrame.createArticleListModule(), "Error Initializing Article List View")
+    func testNewsViewInitializing() {
+        XCTAssertNotNil(NewsRouter.createNewsModule(), "Error Initializing News List View")
     }
-    func testArticleListFetchingService() {
-        promise = expectation(description: "Article Listing API Test")
+    func testNewsFetchingService() {
+        promise = expectation(description: "News Listing API Test")
         let dispatcher = NetworkDispatcher(configuration: URLSession(configuration: .default))
-        let dataManager = ArticleListNetworkClient(dispatcher)
+        let dataManager = NewsNetworkClient(dispatcher)
         dataManager.remoteRequestHandler = self
-        let request = APIRequest.articles(section: "all-sections", timePeriod: TimePeriod.Week.rawValue, offset:20)
-        dataManager.loadArticles(request, section: "all-sections", timePeriod: TimePeriod.Week, offset: 20)
+        let request = APIRequest.news(section: "all-sections", timePeriod: TimePeriod.Week.rawValue, offset:20)
+        dataManager.loadNews(request, section: "all-sections", timePeriod: TimePeriod.Week, offset: 20)
         waitForExpectations(timeout: 60.0) { (error) in
             XCTAssertNil(error, "Error")
         }
 
     }
     
-    func testArticleSectionFetchingService() {
-        promise = expectation(description: "Article Sections API Test")
+    func testNewsSectionFetchingService() {
+        promise = expectation(description: "News Sections API Test")
         let dispatcher = NetworkDispatcher(configuration: URLSession(configuration: .default))
-        let dataManager = ArticleListNetworkClient(dispatcher)
+        let dataManager = NewsNetworkClient(dispatcher)
         dataManager.remoteRequestHandler = self
-        let request = APIRequest.articleSections
-        dataManager.loadArticleSections(request)
+        let request = APIRequest.newsSections
+        dataManager.loadNewsSections(request)
         waitForExpectations(timeout: 60.0) { (error) in
             XCTAssertNil(error, "Error")
         }
@@ -61,13 +61,13 @@ class ArticleListTests: XCTestCase {
     
 }
 
-extension ArticleListTests: ArticleListDataManagerOutputProtocol {
+extension NewsTests: NewsDataManagerOutputProtocol {
     
-    func onArticleSectionRetrieved(_ articles: ArticleSectionBase) {
+    func onNewsSectionRetrieved(_ news: NewsSectionBase) {
         XCTAssertTrue(true, "Success")
         promise.fulfill()
     }
-    func onArticleRetrieved(_ articles: ArticleListBase) {
+    func onNewsRetrieved(_ news: NewsBase) {
         XCTAssertTrue(true, "Success")
         promise.fulfill()
     }

@@ -1,24 +1,24 @@
 //
-//  NewsArticleTests.swift
-//  NewsArticleTests
+//  NewsNewsTests.swift
+//  NewsNewsTests
 //
 //  Created by Muhammad Waqas on 7/24/19.
 //  Copyright © 2019 Muhammad Waqas. All rights reserved.
 //
 
 import XCTest
-@testable import NewsArticle
+@testable import NewsNews
 
-class ArticleDetailTests: XCTestCase {
+class NewsDetailTests: XCTestCase {
 
-    private let articleList = Data("""
+    private let news = Data("""
                                             {
                                             "url":"https:www.nytimes.com",
                                             "adx_keywords":"Medina, Julia Isabel Amparo;Immigration Detention;Citizenship and Naturalization;San Ysidro (Calif);Tijuana (Mexico);Customs and Border Protection (US);Immigration and Emigration;Trump, Donald J;United States Politics and Government",
                                             "column":null,
                                             "section":"U.S.",
                                             "byline":"By MATT STEVENS",
-                                            "type":"Article",
+                                            "type":"News",
                                             "title":"9-Year-Old Girl Was Detained at Border for 30 Hours Despite Being a U.S. Citizen",
                                             "abstract":"A government spokesman said the girl had 201cprovided inconsistent information 201d while crossing during her daily commute to school and was detained while her identity was verified.",
                                             "published_date":"2019-03-22",
@@ -72,24 +72,24 @@ class ArticleDetailTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testArticleListModel() throws {
-        let result = parseArticleList()
+    func testNewsModel() throws {
+        let result = parseNews()
         if (result.0 != nil) {
             XCTAssertTrue(true)
         } else if let error = result.1 {
             XCTFail("Error while converting to model \(error.localizedDescription)")
         }
     }
-    func testArticleDetailViewInitializing() {
-        let result = parseArticleList()
-        if let article = result.0 {
-            XCTAssertNotNil(ArticleDetailWireFrame.createArticleDetailModule(article), "Error Initializing Article Detail View")
+    func testNewsDetailViewInitializing() {
+        let result = parseNews()
+        if let news = result.0 {
+            XCTAssertNotNil(NewsDetailRouter.createNewsDetailModule(news), "Error Initializing News Detail View")
         }
     }
 
-    private func parseArticleList()->(Article?, Error?) {
+    private func parseNews()->(News?, Error?) {
         do {
-            let result = try JSONDecoder().decode(Article.self, from: articleList)
+            let result = try JSONDecoder().decode(News.self, from: news)
             return (result,nil)
         } catch let error {
             return (nil,error)

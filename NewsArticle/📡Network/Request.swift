@@ -1,6 +1,6 @@
 //
 //  Request.swift
-//  NewsArticle
+//  NewsNews
 //
 //  Created by Muhammad Waqas on 7/24/19.
 //  Copyright © 2019 Muhammad Waqas. All rights reserved.

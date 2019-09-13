@@ -1,6 +1,6 @@
 //
-//  NewsArticleUITests.swift
-//  NewsArticleUITests
+//  NewsNewsUITests.swift
+//  NewsNewsUITests
 //
 //  Created by Muhammad Waqas on 7/24/19.
 //  Copyright © 2019 Muhammad Waqas. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class NewsArticleUITests: XCTestCase {
+class NewsNewsUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

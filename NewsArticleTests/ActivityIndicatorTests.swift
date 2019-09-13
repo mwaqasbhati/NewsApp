@@ -1,6 +1,6 @@
 //
 //  ActivityIndicator.swift
-//  NewsArticleTests
+//  NewsNewsTests
 //
 //  Created by macadmin on 7/25/19.
 //  Copyright © 2019 Muhammad Waqas. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import NewsArticle
+@testable import NewsNews
 
 class ActivityIndicatorTests: XCTestCase, Showable {
 
