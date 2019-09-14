@@ -11,6 +11,15 @@ import Foundation
 
 class SourcesRouter: SourcesRouterProtocol {
     
+    /**
+     Configure Sources Viper Module
+     
+     
+     - return: it will return SourcesPresenter which will handle all presentation logic
+     
+     This method creates VIPER stack for Sources module which includes, View, Interactor, Presenter, Entity and gateway.
+     */
+    
     static func createSourcePresenter() -> SourcesPresenterProtocol {
         let dispatcher = NetworkDispatcher(configuration: URLSession(configuration: .default))
         let gateway = SourcesEntityGateway(dispatcher)

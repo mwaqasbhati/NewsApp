@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import NewsNews
+@testable import NewsArticle
 
 class GeneralTests: XCTestCase {
 

@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import NewsNews
+@testable import NewsArticle
 
 class NewsTests: XCTestCase {
 
@@ -28,23 +28,36 @@ class NewsTests: XCTestCase {
     func testNewsFetchingService() {
         promise = expectation(description: "News Listing API Test")
         let dispatcher = NetworkDispatcher(configuration: URLSession(configuration: .default))
-        let dataManager = NewsNetworkClient(dispatcher)
-        dataManager.remoteRequestHandler = self
-        let request = APIRequest.news(section: "all-sections", timePeriod: TimePeriod.Week.rawValue, offset:20)
-        dataManager.loadNews(request, section: "all-sections", timePeriod: TimePeriod.Week, offset: 20)
+        let entityGateway = NewsGateway(dispatcher)
+        let request = APIRequest.headlineNews("bbc-news")
+        entityGateway.fetchNews(request) { [weak self] (news, error) in
+            if error == nil {
+                XCTAssertTrue(true, "Success")
+                self?.promise.fulfill()
+            } else {
+                XCTAssertThrowsError(error)
+                self?.promise.fulfill()
+            }
+        }
         waitForExpectations(timeout: 60.0) { (error) in
             XCTAssertNil(error, "Error")
         }
-
     }
     
     func testNewsSectionFetchingService() {
-        promise = expectation(description: "News Sections API Test")
+        promise = expectation(description: "News Sources API Test")
         let dispatcher = NetworkDispatcher(configuration: URLSession(configuration: .default))
-        let dataManager = NewsNetworkClient(dispatcher)
-        dataManager.remoteRequestHandler = self
-        let request = APIRequest.newsSections
-        dataManager.loadNewsSections(request)
+        let entityGateway = SourcesEntityGateway(dispatcher)
+        let request = APIRequest.sources
+        entityGateway.fetchSources(request) { [weak self] (sources, error) in
+            if error == nil {
+                XCTAssertTrue(true, "Success")
+                self?.promise.fulfill()
+            } else {
+                XCTAssertThrowsError(error)
+                self?.promise.fulfill()
+            }
+        }
         waitForExpectations(timeout: 60.0) { (error) in
             XCTAssertNil(error, "Error")
         }
@@ -61,20 +74,4 @@ class NewsTests: XCTestCase {
     
 }
 
-extension NewsTests: NewsDataManagerOutputProtocol {
-    
-    func onNewsSectionRetrieved(_ news: NewsSectionBase) {
-        XCTAssertTrue(true, "Success")
-        promise.fulfill()
-    }
-    func onNewsRetrieved(_ news: NewsBase) {
-        XCTAssertTrue(true, "Success")
-        promise.fulfill()
-    }
-    func onError(_ error: Error) {
-        XCTAssertThrowsError(error)
-        promise.fulfill()
-    }
-    
-}
 

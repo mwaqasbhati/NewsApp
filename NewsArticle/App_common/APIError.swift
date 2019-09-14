@@ -20,6 +20,7 @@ enum APIError: Error {
     case responseUnsuccessful
     case jsonParsingFailure
     case internetError
+    case unknown
     case responseError(String)
     
     var localizedDescription: String {
@@ -29,7 +30,8 @@ enum APIError: Error {
         case .responseUnsuccessful: return "Response Unsuccessful."
         case .jsonParsingFailure: return "JSON Parsing Failure."
         case .jsonConversionFailure: return "JSON Conversion Failure."
-        case .internetError: return "Not connected to internet."
+        case .internetError: return "No internet connection, please try again later."
+        case .unknown: return "Unknown error occur, please try again later."
         case .responseError(let message):
             return message
         }

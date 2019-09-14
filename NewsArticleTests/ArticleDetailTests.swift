@@ -7,61 +7,21 @@
 //
 
 import XCTest
-@testable import NewsNews
+@testable import NewsArticle
 
 class NewsDetailTests: XCTestCase {
 
     private let news = Data("""
-                                            {
-                                            "url":"https:www.nytimes.com",
-                                            "adx_keywords":"Medina, Julia Isabel Amparo;Immigration Detention;Citizenship and Naturalization;San Ysidro (Calif);Tijuana (Mexico);Customs and Border Protection (US);Immigration and Emigration;Trump, Donald J;United States Politics and Government",
-                                            "column":null,
-                                            "section":"U.S.",
-                                            "byline":"By MATT STEVENS",
-                                            "type":"News",
-                                            "title":"9-Year-Old Girl Was Detained at Border for 30 Hours Despite Being a U.S. Citizen",
-                                            "abstract":"A government spokesman said the girl had 201cprovided inconsistent information 201d while crossing during her daily commute to school and was detained while her identity was verified.",
-                                            "published_date":"2019-03-22",
-                                            "source":"The New York Times",
-                                            "id":100000006423892,
-                                            "asset_id":100000006423892,
-                                            "views":1,
-                                            "des_facet":[
-                                            "IMMIGRATION DETENTION",
-                                            "IMMIGRATION AND EMIGRATION",
-                                            "UNITED STATES POLITICS AND GOVERNMENT"
-                                            ],
-                                            "org_facet":[
-                                            "CITIZENSHIP AND NATURALIZATION",
-                                            "CUSTOMS AND BORDER PROTECTION (US)"
-                                            ],
-                                            "per_facet":[
-                                            "MEDINA, JULIA ISABEL AMPARO",
-                                            "TRUMP, DONALD J"
-                                            ],
-                                            "geo_facet":[
-                                            "SAN YSIDRO (CALIF)",
-                                            "TIJUANA (MEXICO)"
-                                            ],
-                                            "media":[
-                                            {
-                                            "type":"image",
-                                            "subtype":"photo",
-                                            "caption":"Julia Isabel Amparo Medina with her mother and brother. She and her brother were detained on their way to school in California.",
-                                            "copyright":"NBC 7 San Diego",
-                                            "approved_for_syndication":1,
-                                            "media-metadata":[
-                                            {
-                                            "url":"https:",
-                                            "format":"square320",
-                                            "height":320,
-                                            "width":320
-                                            }
-                                            ]
-                                            }
-                                            ]
-                                            }
-                                            """.utf8)
+                                {
+                                "author": "Cole Petersen",
+                                "title": "Bitcoin Pushes Higher as Bulls Target $10,800",
+                                "description": "After facing a sudden influx of selling pressure yesterday, Bitcoin’s bulls have been able to defend its position within the mid-$10,000 region and are now pushing BTC up towards its next key resistance level around $10,400. Assuming that this level is broken…",
+                                "url": "https://www.newsbtc.com/2019/09/14/bitcoin-pushes-higher-as-bulls-target-10800/",
+                                "urlToImage": "https://www.newsbtc.com/wp-content/uploads/2019/09/shutterstock_1029670141-1200x780.jpg",
+                                "publishedAt": "2019-09-14T19:30:44Z",
+                                "content": "After facing a sudden influx of selling pressure yesterday, Bitcoins bulls have been able to defend its position within the mid-$10,000 region and are now pushing BTC up towards its next key resistance level around $10,400.\r\nAssuming that this level is broken… [+2647 chars]"
+                                }
+                            """.utf8)
     
     
     override func setUp() {

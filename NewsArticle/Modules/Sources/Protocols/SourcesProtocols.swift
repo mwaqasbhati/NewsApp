@@ -12,9 +12,9 @@ import UIKit
 // Presenter Protocol
 
 protocol SourcesPresenterProtocol {
-    var sourcesInteractor: SourcesInteractorProtocol {get set}
-    var didSelectSource: ((_ index: Int)->())? {get set}
-    var didSourceError: ((_ error: Error)->())? {get set}
+    var sourcesInteractor: SourcesInteractorProtocol { get set }
+    var didSelectSource: ((_ index: Int)->())? { get set }
+    var didSourceError: ((_ error: String)->())? { get set }
     
     func didSourceSuccess(_ completion: @escaping ([SourceViewModel])->())
     func presentSources(_ view: UIViewController, sources: [SourceViewModel])
@@ -25,13 +25,13 @@ protocol SourcesPresenterProtocol {
 protocol SourcesInteractorProtocol {
     var sourcesGateway: SourcesEntityGatewayProtocol {get set}
     
-    func onFetchSources(_ completion: @escaping ([Sources]?, Error?)->())
+    func onFetchSources(_ completion: @escaping ([Sources]?, APIError?)->())
 }
 
 // Entity Gateway Protocol
 
 protocol SourcesEntityGatewayProtocol {
-    func fetchSources(_ request: APIRequest, completion: @escaping ([Sources]?, Error?)->())
+    func fetchSources(_ request: APIRequest, completion: @escaping ([Sources]?, APIError?)->())
 }
 
 // Router Protocol

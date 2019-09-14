@@ -25,7 +25,7 @@ class NewsGateway: NewsEntityGatewayProtocol {
      This method accepts a Request object containing (path, method, parameters), Decodable entity type and completion block which will be called when we will get data.
      */
     
-    func fetchNews(_ request: APIRequest, completion: @escaping ([News]?, Error?) -> ()) {
+    func fetchNews(_ request: APIRequest, completion: @escaping ([News]?, APIError?) -> ()) {
         dispatcher?.execute(request: request, decode: NewsResponse.self) { (response) in
             switch response {
             case .success(let news):

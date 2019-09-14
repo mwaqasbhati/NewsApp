@@ -11,6 +11,12 @@ import SDWebImage
 
 class NewsTableViewCell: UITableViewCell {
 
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let placeholder = "placeholder"
+    }
+    
     // MARK: - IBOutlets
     @IBOutlet weak var imageviewThumbnail: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
@@ -47,7 +53,7 @@ class NewsTableViewCell: UITableViewCell {
             labelDate.text = publishAt.getPresentable()
         }
         if  let media = news.url, let url = URL(string: media) {
-            imageviewThumbnail.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: .transformAnimatedImage, progress: nil, completed: nil)
+            imageviewThumbnail.sd_setImage(with: url, placeholderImage: UIImage(named: Constants.placeholder), options: .transformAnimatedImage, progress: nil, completed: nil)
         }
     }
 }

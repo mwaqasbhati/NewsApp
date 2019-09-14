@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if var newsView = NewsRouter.createNewsModule() {
             newsView.sourcePresenter = SourcesRouter.createSourcePresenter()
             let navController = UINavigationController(rootViewController: newsView as! UIViewController)
+            navController.navigationBar.prefersLargeTitles = true
             navController.navigationBar.tintColor = UIColor.black
             self.window?.rootViewController = navController
         }

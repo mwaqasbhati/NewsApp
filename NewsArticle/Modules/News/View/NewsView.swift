@@ -5,8 +5,6 @@
 // Created by Muhammad Waqas Bhati//
 
 import UIKit
-import PKHUD
-import Dropdowns
 
 class NewsView: UIViewController, NewsViewProtocol {
     
@@ -14,7 +12,6 @@ class NewsView: UIViewController, NewsViewProtocol {
 
     private enum Constants {
         static let bbcNewsId = "bbc-news"
-        static let bbcNews = "BBC News"
     }
     // MARK: - IBOutlets
     
@@ -28,7 +25,7 @@ class NewsView: UIViewController, NewsViewProtocol {
     var presenter: NewsPresenterProtocol?
     var sourcePresenter: SourcesPresenterProtocol?
     private var selectedSection = Constants.bbcNewsId
-
+    private let group = DispatchGroup()
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -46,9 +43,14 @@ class NewsView: UIViewController, NewsViewProtocol {
     
     private func setup() {
         
+        showProgress()
+        
         fetchNews()
         fetchSources()
-
+        
+        group.notify(queue: DispatchQueue.main) {
+            self.hideProgress()
+        }
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(NewsView.refresh), for: UIControl.Event.valueChanged)
         tableView.refreshControl = refreshControl
@@ -62,25 +64,29 @@ class NewsView: UIViewController, NewsViewProtocol {
      It fetches news categories from Network API.
      
      
-     This method fetches all news categories like entertainment, music etc.
+     This method fetches all news Sources like BBC, CNN etc.
      */
     
     private func fetchSources() {
-        sourcePresenter?.didSourceSuccess({ sourcesVM in
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else { return }
-                self.sourceViewModel = sourcesVM
+        group.enter()
+        sourcePresenter?.didSourceError = { [weak self] (error) in
+            self?.group.leave()
+            DispatchQueue.main.async {
+                self?.showError(error)
+            }
+        }
+        sourcePresenter?.didSourceSuccess({ [weak self] sourcesVM in
+            guard let `self` = self else { return }
+            self.sourceViewModel = sourcesVM
+            self.group.leave()
+            DispatchQueue.main.async {
                 self.sourcePresenter?.presentSources(self, sources: self.sourceViewModel)
             }
         })
-        sourcePresenter?.didSourceError = { [weak self] (error) in
-            self?.hideProgress()
-            self?.showError(error.localizedDescription)
-        }
         sourcePresenter?.didSelectSource = { [weak self] (index) in
             guard let `self` = self else { return }
             self.selectedSection = self.sourceViewModel[index].id ?? Constants.bbcNewsId
-            self.resetFiltersAndLoad()
+            self.updateNews()
         }
     }
     
@@ -88,14 +94,25 @@ class NewsView: UIViewController, NewsViewProtocol {
      It fetches news data from Network API..
      
      
-     This method fetches news based on section, time and offset.
+     This method fetches news based on news source.
      */
     
     private func fetchNews() {
-        self.presenter?.didFetchNews(self.selectedSection, completion: { [weak self] (newsVM, error) in
+        group.enter()
+        presenter?.didNewsError = { [weak self] error in
             guard let `self` = self else { return }
-            self.newsViewModel = newsVM ?? [NewsViewModel]()
+            self.group.leave()
             DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                self.showError(error)
+            }
+        }
+        presenter?.didFetchNews(self.selectedSection, completion: { [weak self] newsVM in
+            guard let `self` = self else { return }
+            self.newsViewModel = newsVM
+            self.group.leave()
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
             }
         })
@@ -103,46 +120,32 @@ class NewsView: UIViewController, NewsViewProtocol {
     }
     
     /**
-     It reset all news data filters and fetches all sections from Network API.
-     
      
      This method refreshed news data.
      */
     
     @objc func refresh(sender:AnyObject) {
-         resetFiltersAndLoad()
+         updateNews()
     }
     
     /**
-     It reset news offset to 0 and fetches news.
+     It updated news and fetch latest news from Network.
      
     */
     
-    private func resetFiltersAndLoad() {
+    private func updateNews() {
         newsViewModel.removeAll()
         fetchNews()
     }
     
     // MARK: - IBActions
     
-}
-
-// MARK: - NewsViewProtocol
-
-extension NewsView {
     
-    func presentNews(_ news: [NewsViewModel]) {
-        newsViewModel = news
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else { return }
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
-        }
-    }
     
 }
 
 // MARK: - UITableView DataSource & Delegate
+
 extension NewsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsViewModel.count

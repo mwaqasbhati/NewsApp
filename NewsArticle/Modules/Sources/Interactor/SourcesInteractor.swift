@@ -17,7 +17,15 @@ class SourcesInteractor: SourcesInteractorProtocol {
         sourcesGateway = gateway
     }
     
-    func onFetchSources(_ completion: @escaping ([Sources]?, Error?) -> ()) {
+    /**
+     Get sources from entity gateway
+     
+     - completion: it will return sources or error fetched from entity gateway
+     
+     This method creates VIPER stack for Sources module which includes, View, Interactor, Presenter, Entity and gateway.
+     */
+    
+    func onFetchSources(_ completion: @escaping ([Sources]?, APIError?) -> ()) {
         let request = APIRequest.sources
         sourcesGateway.fetchSources(request, completion: completion)
     }

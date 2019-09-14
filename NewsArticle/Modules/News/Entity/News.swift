@@ -5,7 +5,6 @@
 import Foundation
 
 struct News : Codable {
-	//let source : Source?
 	let author : String?
 	let title : String?
 	let description : String?
@@ -15,8 +14,6 @@ struct News : Codable {
 	let content : String?
 
 	enum CodingKeys: String, CodingKey {
-
-//		case source = "source"
 		case author = "author"
 		case title = "title"
 		case description = "description"
@@ -28,7 +25,6 @@ struct News : Codable {
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-	//	source = try values.decodeIfPresent(Source.self, forKey: .source)
 		author = try values.decodeIfPresent(String.self, forKey: .author)
 		title = try values.decodeIfPresent(String.self, forKey: .title)
 		description = try values.decodeIfPresent(String.self, forKey: .description)

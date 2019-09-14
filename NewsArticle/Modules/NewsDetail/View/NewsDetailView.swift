@@ -76,22 +76,16 @@ class NewsDetailView: UIViewController {
         }
     }
     
+    // MARK: - IBActions
     
     @IBAction func moreDetailButtonPressed(_ sender: Any) {
-        
         if let urlStr = news?.url, let url = URL(string: urlStr) {
-            
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
-                let alert = UIAlertController(title: Constants.error, message: "\(Constants.alertMessage) \(url)", preferredStyle: UIAlertController.Style.alert)
-                
-                alert.addAction(UIAlertAction(title: Constants.close, style: UIAlertAction.Style.cancel, handler: nil))
-                
-                present(alert, animated: true, completion: nil)
+                presentAlert(withTitle: Constants.error, message: "\(Constants.alertMessage) \(url)")
             }
         }
-        
     }
     
 }

@@ -15,13 +15,19 @@ protocol Showable {
     func hideProgress()
 }
 
-extension Showable {
+extension Showable where Self: UIViewController {
     func showError(_ message: String) {
+        func showAlertView(_ message: String) {
+            let alertView = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
+            alertView.addAction(okAction)
+            self.present(alertView, animated: true, completion: nil)
+        }
         if Thread.isMainThread {
-            HUD.flash(.label(message), delay: 2.0)
+                showAlertView(message)
         } else {
             DispatchQueue.main.async {
-                HUD.flash(.label(message), delay: 2.0)
+                showAlertView(message)
             }
         }
     }

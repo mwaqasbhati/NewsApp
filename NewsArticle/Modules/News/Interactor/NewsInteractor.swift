@@ -13,7 +13,7 @@ class NewsInteractor: NewsInteractorProtocol {
         newsGateway = gateway
     }
     
-    func onFetchNews(_ source: String, completion: @escaping ([News]?, Error?)->()) {
+    func onFetchNews(_ source: String, completion: @escaping ([News]?, APIError?)->()) {
         let request = APIRequest.headlineNews(source)
         newsGateway.fetchNews(request, completion: completion)
     }
