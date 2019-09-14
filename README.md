@@ -18,7 +18,7 @@ App Features:
 
 ## Screenshots
 
-|             Categories         |         Article List          | Article Detail |
+|             Sources         |         News          | News Detail |
 |---------------------------------|------------------------------|------------------------------|
 |![Demo](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Categories.png)|![Demo](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Article%20List.png)|![Demo](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Article%20Detail.png)|
 
@@ -31,7 +31,7 @@ App Features:
 
 ## Architecture at a Glance
 
-![Architecture at a Glance](https://github.com/mwaqasbhati/NewsArticle/blob/master/System%20Architecture/System%20Architecture.jpeg)
+![Architecture at a Glance](https://github.com/mwaqasbhati/NewsApp/blob/master/System%20Architecture/System%20Architecture.jpeg)
 
 ## Installation
 
@@ -52,12 +52,17 @@ xcodebuild -workspace "NewsArticle.xcworkspace" -scheme "NewsArticle" -sdk iphon
 ```
 ## Coverage
 
-![Architecture at a Glance](https://github.com/mwaqasbhati/NewsArticle/blob/master/Screenshots/Test%20Coverage.png)
+![Architecture at a Glance](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Test%20Coverage.png)
 
 ## Azure Devops CI/CD
 
-![Architecture at a Glance](https://github.com/mwaqasbhati/NewsArticle/blob/master/Screenshots/Azure%20Devops.png)
+![Architecture at a Glance](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Azure%20Devops.png)
 
+## Open Source Libraries Used
+
+pod 'PKHUD', '~> 5.0'
+pod 'SDWebImage'
+pod 'Dropdowns'
 
 ## Discussions
 
@@ -69,5 +74,5 @@ mwaqasbhati, m.waqas.bhati@hotmail.com
 
 ## License
 
-NewsArticle is available under the MIT license. See the LICENSE file for more info.
+NewsApp is available under the MIT license. See the LICENSE file for more info.
 
