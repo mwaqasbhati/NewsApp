@@ -62,7 +62,7 @@ class SourcesPresenter: SourcesPresenterProtocol {
         sections = sources.map({ $0.name ?? "" })
         guard let navC = view.navigationController else { return }
         if let titleView = TitleView(navigationController: navC, title: bbcNews, items: self.sections, initialIndex: sources.firstIndex(where: { $0.id == defaultId }) ?? 0) {
-            view.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleView)
+            view.navigationItem.titleView = titleView
             titleView.action = { [weak self] index in
                 guard let `self` = self else { return }
                 self.didSelectSource?(index)

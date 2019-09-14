@@ -19,7 +19,7 @@ class NewsDetailTests: XCTestCase {
                                 "url": "https://www.newsbtc.com/2019/09/14/bitcoin-pushes-higher-as-bulls-target-10800/",
                                 "urlToImage": "https://www.newsbtc.com/wp-content/uploads/2019/09/shutterstock_1029670141-1200x780.jpg",
                                 "publishedAt": "2019-09-14T19:30:44Z",
-                                "content": "After facing a sudden influx of selling pressure yesterday, Bitcoins bulls have been able to defend its position within the mid-$10,000 region and are now pushing BTC up towards its next key resistance level around $10,400.\r\nAssuming that this level is broken… [+2647 chars]"
+                                "content": "After facing a sudden influx of selling pressure yesterday, Bitcoins bulls have been able to defend its position within the"
                                 }
                             """.utf8)
     
