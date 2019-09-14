@@ -1,4 +1,4 @@
-# NewsArticle
+# NewsApp
 
 
 ## Demonstrations
@@ -13,14 +13,14 @@ App Features:
 * Auto layouts
 * VIPER Design Pattern 
 * Supports Portrait and Landscape
-* Article Listing from NYC Most popular API
-* Apply Different filters to view your relevant articles
+* Headline news from `https://newsapi.org/`
+* Fetch from different source
 
 ## Screenshots
 
 |             Categories         |         Article List          | Article Detail |
 |---------------------------------|------------------------------|------------------------------|
-|![Demo]()|![Demo]()|![Demo]()|
+|![Demo](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Categories.png)|![Demo](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Article%20List.png)|![Demo](https://github.com/mwaqasbhati/NewsApp/blob/master/Screenshots/Article%20Detail.png)|
 
 ## Requirements
 
