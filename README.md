@@ -60,9 +60,9 @@ xcodebuild -workspace "NewsArticle.xcworkspace" -scheme "NewsArticle" -sdk iphon
 
 ## Open Source Libraries Used
 
-pod 'PKHUD', '~> 5.0'
-pod 'SDWebImage'
-pod 'Dropdowns'
+* pod 'PKHUD', '~> 5.0'
+* pod 'SDWebImage'
+* pod 'Dropdowns'
 
 ## Discussions
 
